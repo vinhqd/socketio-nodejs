@@ -10,8 +10,16 @@ const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
     console.log('Co nguoi ket noi id: ' + socket.id);
+
     socket.on('disconnect', () => {
-        console.log(socket.id + ' da ngat ket noi')
+        console.log(socket.id + ' da ngat ket noi.')
+    })
+
+    socket.on('client data', (data) => {
+        console.log(data)
+        // io.sockets.emit('server data', data);
+        // socket.emit('server data', data + " YOU")
+        socket.broadcast.emit('server data', data + " YOU");
     })
 })
 

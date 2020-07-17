@@ -8,12 +8,21 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         let socket = io('http://localhost:3000/');
+
+        socket.on('server data', (data) => {
+            console.log(socket.id);
+            $('#content').append(data + ", ")
+        })
+
         $(document).ready(() => {
-            
+            $('#mrA').click(() => {
+                socket.emit('client data', 'HELLO');
+            })
         });
     </script>
 </head>
 <body>
-    <h1>Hello</h1>
+    <div id="mrA">Click send</div>
+    <h2 id="content"></h2>
 </body>
 </html>
